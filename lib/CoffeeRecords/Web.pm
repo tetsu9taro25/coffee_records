@@ -15,7 +15,7 @@ sub dispatch {
 __PACKAGE__->load_plugins(
     'Web::FillInFormLite',
     'Web::JSON',
-    '+CoffeeRecords::Web::Plugin::Session',
+    '+CoffeeRecords::Web::Plugin::Response',
 );
 
 # setup view

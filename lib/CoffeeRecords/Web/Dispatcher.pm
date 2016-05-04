@@ -3,27 +3,15 @@ use strict;
 use warnings;
 use utf8;
 use Amon2::Web::Dispatcher::RouterBoom;
+use CoffeeRecords::Repository::Text;
 
-any '/' => sub {
-    my ($c) = @_;
-    my $counter = $c->session->get('counter') || 0;
-    $counter++;
-    $c->session->set('counter' => $counter);
-    return $c->render('index.tx', {
-        counter => $counter,
-    });
-};
+use CoffeeRecords::Web::C::Page;
 
-post '/reset_counter' => sub {
-    my $c = shift;
-    $c->session->remove('counter');
-    return $c->redirect('/');
-};
+base 'CoffeeRecords::Web::C';
 
-post '/account/logout' => sub {
-    my ($c) = @_;
-    $c->session->expire();
-    return $c->redirect('/');
-};
+get  '/'    => 'Page#get_root';
+get  '/:id' => 'Page#get_id';
+post '/'    => 'Page#post_root';
+post '/:id' => 'Page#post_id';
 
 1;
