@@ -1,3 +1,0 @@
-name="CoffeeRecords"
-[build]
-build_class = "builder::MyBuilder"
