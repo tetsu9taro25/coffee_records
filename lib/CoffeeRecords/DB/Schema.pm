@@ -8,9 +8,12 @@ use Teng::Schema::Declare;
 base_row_class 'CoffeeRecords::DB::Row';
 
 table {
-    name 'member';
+    name 'text';
     pk 'id';
-    columns qw(id name);
+    columns qw(
+        id
+        text
+    );
 };
 
 1;
