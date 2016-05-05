@@ -4,6 +4,13 @@
 <form method="POST" action="<: $action :>">
   <textarea name="text" rows="10" cols="50"></textarea>
   <input type="submit" value="<: $button :>" />
+  : if ($created_at) {
+    <p>作成日時: <: $created_at :></p>
+  : }
+
+  : if ($updated_at) {
+    <p>更新日時: <: $updated_at :></p>
+  : }
 </form>
 
 : }

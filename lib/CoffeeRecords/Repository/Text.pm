@@ -9,8 +9,7 @@ sub db { CoffeeRecords->context->db }
 sub fetch_by_id {
   my ($class, $id) = @_;
 
-  my $row = $class->db->single(text => {id => $id});
-  return $row ? $row->text : undef;
+  return $class->db->single(text => {id => $id});
 }
 
 sub create {

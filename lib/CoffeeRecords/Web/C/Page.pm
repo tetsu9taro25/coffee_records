@@ -18,13 +18,15 @@ sub get_id {
   my ($class, $c, $args) = @_;
   my $id = $args->{id};
 
-  my $text = CoffeeRecords::Repository::Text->fetch_by_id($id)
+  my $row = CoffeeRecords::Repository::Text->fetch_by_id($id)
     or return $c->res_404;
 
-  $c->fillin_form({text => $text});
+  $c->fillin_form({text => $row->text});
   return $c->render('form.tx', {
       action => "/$id",
       button => 'update',
+      created_at => $row->created_at_str,
+      updated_at => $row->updated_at_str,
     });
 }
 
