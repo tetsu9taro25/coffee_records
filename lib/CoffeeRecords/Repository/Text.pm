@@ -13,11 +13,11 @@ sub fetch_by_id {
 }
 
 sub create {
-  my ($class, $text) = @_;
+  my ($class, $beans_name, $text) = @_;
 
   # XXX: 本来はinsertしたrowのidが取れるけどMySQL 5.7.8以降でバグってるから最新のやつを取り直す
   # この実装だと、insertが並列に走った場合にここでinsertしたのとは違うrowが取れる可能性がある
-  my $id = $class->db->fast_insert(text => {text => $text});
+  my $id = $class->db->fast_insert(text => {beans_name => $beans_name, text => $text});
   my $row = $class->db->single(text => {}, {
       columns  => [qw/id/],
       order_by => {id => 'DESC'},
@@ -27,9 +27,9 @@ sub create {
 }
 
 sub update {
-  my ($class, $id, $text) = @_;
+  my ($class, $id, $beans_name, $text) = @_;
 
-  $class->db->update(text => {text => $text}, {id => $id});
+  $class->db->update(text => {beans_name => $beans_name, text => $text}, {id => $id});
 }
 
 1;

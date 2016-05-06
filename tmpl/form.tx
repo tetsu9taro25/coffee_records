@@ -1,9 +1,17 @@
 : cascade "include/layout.tx"
 : override content -> {
-
 <form method="POST" action="<: $action :>">
-  <textarea name="text" rows="10" cols="50"></textarea>
-  <input type="submit" value="<: $button :>" />
+  <table>
+    <tr>
+      <th>品種名</th>
+      <td><input type="text" name="beans_name" /></td>
+    </tr>
+    <tr>
+      <th>感想</th>
+      <td><textarea name="text" rows="10" cols="50"></textarea></td>
+    </tr>
+  </table>
+  <div><input type="submit" value="<: $button :>" /></div>
   : if ($created_at) {
     <p>作成日時: <: $created_at :></p>
   : }

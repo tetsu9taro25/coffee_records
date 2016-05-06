@@ -21,7 +21,7 @@ sub get_id {
   my $row = CoffeeRecords::Repository::Text->fetch_by_id($id)
     or return $c->res_404;
 
-  $c->fillin_form({text => $row->text});
+  $c->fillin_form({beans_name => $row->beans_name, text => $row->text});
   return $c->render('form.tx', {
       action => "/$id",
       button => 'update',
@@ -33,10 +33,10 @@ sub get_id {
 sub post_root {
   my ($class, $c, $args) = @_;
 
-  my $text = $c->req->parameters->{text}
-    or return $c->res_400;
+  my $beans_name = $c->req->parameters->{beans_name} or return $c->res_400;
+  my $text = $c->req->parameters->{text} or return $c->res_400;
 
-  my $id = CoffeeRecords::Repository::Text->create($text);
+  my $id = CoffeeRecords::Repository::Text->create($beans_name,$text);
 
   return $c->redirect("/$id");
 }
@@ -45,10 +45,11 @@ sub post_id {
   my ($class, $c, $args) = @_;
   my $id = $args->{id};
 
+  my $beans_name = $c->req->parameters->{beans_name} or return $c->res_400;
   my $text = $c->req->parameters->{text} or return $c->res_400;
   my $old_text = CoffeeRecords::Repository::Text->fetch_by_id($id) or return $c->res_404;
 
-  CoffeeRecords::Repository::Text->update($id, $text);
+  CoffeeRecords::Repository::Text->update($id, $beans_name, $text);
 
   return $c->redirect("/$id");
 }
