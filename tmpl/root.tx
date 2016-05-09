@@ -1,0 +1,8 @@
+: cascade "include/layout.tx"
+: override content -> {
+
+: for my $id (@rows) {
+<a href="/<: $id :>"><: $id :></a>
+: }
+<a href="/add">追加</a>
+: }

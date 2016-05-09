@@ -1,0 +1,15 @@
+: cascade "include/layout.tx"
+: override content -> {
+<table>
+  <tr>
+    <th>品種名</th>
+    <td><: $beans_name :></td>
+  </tr>
+  <tr>
+    <th>感想</th>
+    <td><: $text :></td>
+  </tr>
+</table>
+<a href="/edit/<: $id :>">編集</a>
+: }
+

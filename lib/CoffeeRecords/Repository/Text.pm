@@ -12,6 +12,12 @@ sub fetch_by_id {
   return $class->db->single(text => {id => $id});
 }
 
+sub fetch_all {
+  my ($class) = @_;
+    my @rows = $teng->search('text',{id => 1},{order_by => 'id'});
+  return @rows;
+}
+
 sub create {
   my ($class, $beans_name, $text) = @_;
 

@@ -8,13 +8,36 @@ use CoffeeRecords::Repository::Text;
 sub get_root {
   my ($class, $c, $args) = @_;
 
+  my @rows = CoffeeRecords::Repository::Text->fetch_all or return $c->res_404;
+  return $c->render('root.tx', {
+      rows => @rows,
+    });
+}
+
+sub get_add {
+  my ($class, $c, $args) = @_;
+
   return $c->render('form.tx', {
-      action => '/',
+      action => '/add',
       button => 'create',
     });
 }
 
 sub get_id {
+  my ($class, $c, $args) = @_;
+  my $id = $args->{id};
+
+  my $row = CoffeeRecords::Repository::Text->fetch_by_id($id)
+    or return $c->res_404;
+
+  return $c->render('show.tx', {
+      beans_name => $row->beans_name,
+      text => $row->text,
+      id => $id,
+    });
+}
+
+sub get_edit_id {
   my ($class, $c, $args) = @_;
   my $id = $args->{id};
 
@@ -30,7 +53,7 @@ sub get_id {
     });
 }
 
-sub post_root {
+sub post_add {
   my ($class, $c, $args) = @_;
 
   my $beans_name = $c->req->parameters->{beans_name} or return $c->res_400;
