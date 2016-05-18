@@ -8,9 +8,9 @@ use CoffeeRecords::Repository::Text;
 sub get_root {
   my ($class, $c, $args) = @_;
 
-  my @rows = CoffeeRecords::Repository::Text->fetch_all or return $c->res_404;
+  my $memo = CoffeeRecords::Repository::Text->fetch_all or return $c->res_404;
   return $c->render('root.tx', {
-      rows => @rows,
+      memos => $memo,
     });
 }
 

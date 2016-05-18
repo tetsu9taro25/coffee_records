@@ -14,8 +14,8 @@ sub fetch_by_id {
 
 sub fetch_all {
   my ($class) = @_;
-    my @rows = $teng->search('text',{id => 1},{order_by => 'id'});
-  return @rows;
+    my $memo = $class->db->search('text',{id => 1},{order_by => 'id'});
+  return $memo;
 }
 
 sub create {
