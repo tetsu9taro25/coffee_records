@@ -1,8 +1,7 @@
 : cascade "include/layout.tx"
 : override content -> {
-
-: #for my $id ($memo) {
-: #<a href="/<: $id :>"><: $id :></a>
-: #}
-<a href="/add">追加</a>
+<h2>コーヒーレコード一覧 <a href="/add" style="margin-left:10px;font-size:1rem;">追加する</a> </h2>
+: for $memos -> $memo {
+<p><a href="/<: $memo.id :>"><: $memo.beans_name :></a></p>
+: }
 : }

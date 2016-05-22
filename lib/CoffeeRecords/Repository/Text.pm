@@ -14,8 +14,7 @@ sub fetch_by_id {
 
 sub fetch_all {
   my ($class) = @_;
-    my $memo = $class->db->search('text',{id => 1},{order_by => 'id'});
-  return $memo;
+  return $class->db->search('text');
 }
 
 sub create {
